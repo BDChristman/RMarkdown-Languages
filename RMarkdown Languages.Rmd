@@ -1,0 +1,123 @@
+---
+title: "RMarkdown Languages"
+author: "Brian D. Christman"
+date: "1/20/2022"
+output: html_document
+---
+
+```{r}
+library(knitr)
+library(JuliaCall)
+install_julia()
+library(DBI)
+library(DBI)
+library(RSQLite)
+db = dbConnect(RSQLite::SQLite(), dbname = "sql.sqlite")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+names(knitr::knit_engines$get())
+```
+
+# Code in CSS
+
+```{css}
+h1 {
+  color: red;
+  }
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #333;
+}
+```
+
+# Code in R
+
+---
+
+```{r}
+x <- 159 / 20
+i = 3
+
+while(i < x)
+  {print("i is less than x")
+  i = i + 1}
+```
+
+# Code in Python
+
+---
+
+```{python, python.reticulate = FALSE}
+
+x = 11 * 3
+
+for i in range(1,x):
+  print(i)
+```
+
+
+# Code in SQL
+
+---
+```{sql, connection=db}
+CREATE TABLE RTable (
+    ID int,
+    FirstName varchar(100),
+    FavoriteCity varchar(100),
+    PizzaTopping varchar(100)
+);
+
+```
+```{sql, connection=db}
+INSERT INTO RTable 
+    (ID, FirstName, FavoriteCity, PizzaTopping) 
+VALUES 
+    (1,"Rodrigo", "Chicago", "Pepperoni"),
+    (2,"Igor", "Cincinnati", "Pineapple"),
+    (3,"Samantha", "Honolulu", "Cheese");
+    
+```    
+
+```{sql, connection=db}
+SELECT * FROM RTable;
+
+```
+
+```{sql, connection=db}
+DROP TABLE RTable
+```
+
+
+# Code in JavaScript
+
+```{js}
+$('.title').css('color', 'orange')
+$('.author').css('color', 'purple')
+$('.date').css('color', 'green')
+
+```
+
+
+
+# Code in Julia
+
+```{julia}
+x = 196 / 25;
+
+for i in 5:x
+  print("Still less than x", "    ")
+end
+```
+
+# Code in Rscript
+
+```{Rscript}
+print("Hello, my name is Brian D. Christman. It is very nice to meet you!")
+```
